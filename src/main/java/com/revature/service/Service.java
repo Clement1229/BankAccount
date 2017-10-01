@@ -6,6 +6,7 @@ import com.revature.dao.DaoImpl;
 import com.revature.domain.User;
 
 public class Service {
+	
 	Dao dao = new DaoImpl();
 	
 	public void createUser(User user) {
