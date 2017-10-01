@@ -1,24 +1,24 @@
 package com.revature.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import com.revature.domain.Account;
 import com.revature.domain.User;
+import com.revature.util.ConnectionUtil;
 
 public class DaoImpl implements Dao {
 	
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	private String username = "banking_db";
-	private String password = "p4ssw0rd";
+//	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//	private String username = "banking_db";
+//	private String password = "p4ssw0rd";
 	
 	// U_FN, U_LN, U_USERNAME, U_PASSWORD
 	public int createUser(User user) {
 		int status = 0;
 
-		try(Connection conn = DriverManager.getConnection(url, username, password);) {
+		try(Connection conn = ConnectionUtil.getConnection();) {
 			String sql = "INSERT INTO bank_user (U_FN, U_LN, U_USERNAME, U_PASSWORD) values(?,?,?,?)";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
