@@ -14,6 +14,17 @@ public class Account {
 	public Account() {
 		super();
 	}
+	
+	
+	
+	public Account(double balance, int uid) {
+		super();
+		this.balance = balance;
+		this.uid = uid;
+	}
+
+
+
 	public Account(int baid, double balance, int uid) {
 		super();
 		this.baid = baid;
