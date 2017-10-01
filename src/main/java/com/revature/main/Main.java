@@ -83,7 +83,7 @@ public class Main {
 		String password = scan.nextLine();
 		user.setUserName(userName);
 		user.setPassword(password);
-		System.out.println("youre user id: " + service.getUid(user));
+		System.out.println("youre user id: " + service.getBankUserByUsernamePassword(userName,password));
 //		System.out.println("What would you like to do");
 //		System.out.println("1: Deposit");
 //		System.out.println("2: Withdraw");

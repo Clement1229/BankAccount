@@ -14,7 +14,7 @@ public interface Dao {
 		
 		
 		//READ
-		public int getUid(User user); 
+		public User getBankUserByUsernamePassword(String userName, String password); 
 		//public List<FlashCard> getAllFlashCard();
 		//public FlashCard getFlashCardByid(int id);
 		//public FlashCard getFlashCardByQuestion(String question);

@@ -14,6 +14,10 @@ public class User {
 	public User() {
 		super();
 	}
+//	public User(int uid) {
+//		super();
+//		this.uid = uid;
+//	}
 	public User(String firstName, String lastName, String userName, String password) {
 		super();
 		this.firstName = firstName;

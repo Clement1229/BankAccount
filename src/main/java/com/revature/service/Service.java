@@ -12,7 +12,7 @@ public class Service {
 	public void createUser(User user) {
 		dao.createUser(user);
 	}
-	public int getUid(User user) {
-		return dao.createUser(user);
+	public User getBankUserByUsernamePassword(String userName, String password) {
+		return dao.getBankUserByUsernamePassword(userName,password);
 	}
 }
