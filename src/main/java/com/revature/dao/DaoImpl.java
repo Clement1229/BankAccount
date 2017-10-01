@@ -1,7 +1,9 @@
 package com.revature.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.revature.domain.Account;
@@ -44,9 +46,25 @@ public class DaoImpl implements Dao {
 	}
 
 	@Override
-	public User getUid(User userName, User password) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getUid(User user) {
+		int uid = 0; // uid from database
+
+		try (Connection conn = ConnectionUtil.getConnection();) {
+
+			String sql = "SELECT U_ID FROM BANK_USER WHERE U_USERNAME = ? AND U_PASSWORD = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			System.out.println( user.getUserName()+""+ user.getPassword());
+			ps.setString(1, user.getUserName());
+			ps.setString(2, user.getPassword());
+			ResultSet rs = ps.executeQuery();
+			uid = rs.getInt(1);
+			System.out.println("your user id is: " + uid); 
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return uid;
 	}
 
 }

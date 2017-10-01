@@ -43,6 +43,7 @@ public class Main {
 			break;
 		case 2:	
 			logIn(user, service, scan);
+			break;
 		case 5:
 			break;
 
@@ -77,12 +78,16 @@ public class Main {
 	public static void logIn(User user, Service service, Scanner scan) {
 		
 		System.out.println("Enter Your User Name");
+		String userName = scan.nextLine();
 		System.out.println("Enter Your Password");
-		
-		System.out.println("What would you like to do");
-		System.out.println("1: Deposit");
-		System.out.println("2: Withdraw");
-		System.out.println("3: View Balance");
-		System.out.println("4: Exit");
+		String password = scan.nextLine();
+		user.setUserName(userName);
+		user.setPassword(password);
+		System.out.println("youre user id: " + service.getUid(user));
+//		System.out.println("What would you like to do");
+//		System.out.println("1: Deposit");
+//		System.out.println("2: Withdraw");
+//		System.out.println("3: View Balance");
+//		System.out.println("4: Exit");
 	}
 }

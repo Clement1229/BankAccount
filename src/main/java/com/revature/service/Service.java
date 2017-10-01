@@ -12,4 +12,7 @@ public class Service {
 	public void createUser(User user) {
 		dao.createUser(user);
 	}
+	public int getUid(User user) {
+		return dao.createUser(user);
+	}
 }

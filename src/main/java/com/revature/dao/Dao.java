@@ -14,7 +14,7 @@ public interface Dao {
 		
 		
 		//READ
-		public User getUid(User userName, User password); 
+		public int getUid(User user); 
 		//public List<FlashCard> getAllFlashCard();
 		//public FlashCard getFlashCardByid(int id);
 		//public FlashCard getFlashCardByQuestion(String question);
