@@ -43,4 +43,10 @@ public class DaoImpl implements Dao {
 		return 0;
 	}
 
+	@Override
+	public User getUid(User userName, User password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
