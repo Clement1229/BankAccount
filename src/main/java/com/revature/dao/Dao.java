@@ -12,7 +12,7 @@ public interface Dao {
 		public int createUser(User user);
 		//public int createAccount(Account acc);
 		public void deposit(Account account, User user, double amount);
-		public void withdraw(Account account, double amount);
+		public void withdraw(Account account, User user, double amount);
 		public double getBalance(Account account, User user); 
 
 		

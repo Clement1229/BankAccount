@@ -21,19 +21,28 @@ public class DaoImpl implements Dao {
 
 		try(Connection conn = ConnectionUtil.getConnection();) {
 			String sql = "INSERT INTO bank_user (U_FN, U_LN, U_USERNAME, U_PASSWORD) values(?,?,?,?)";
-			String sql2= "INSERT INTO bank_account (U_ID) values(?)"; 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getFirstName());
 			ps.setString(2, user.getLastName());
 			ps.setString(3, user.getUserName());
 			ps.setString(4, user.getPassword());
-			PreparedStatement ps2 = conn.prepareStatement(sql2);
 			
 			status = ps.executeUpdate(); // automatically commit;
+			user = getUserByUsernamePassword( user.getUserName(), user.getPassword());
+			
+			
+			String sql2= "INSERT INTO bank_account (U_ID) values(?)"; 
+			PreparedStatement ps2 = conn.prepareStatement(sql2);
+			System.out.println("uid: " + user.getUid());
+			ps2.setInt(1, user.getUid());
+			ps2.executeUpdate();
 			//System.out.println("Status: " + status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
 		return status;
 
 
@@ -85,9 +94,24 @@ public class DaoImpl implements Dao {
 	}
 
 	@Override
-	public void withdraw(Account account, double amount) {
-		// TODO Auto-generated method stub
-		
+	public void withdraw(Account account, User user, double amount) {
+		if(amount > getBalance(account,user)) {
+			System.out.println("Insufficient Gold");
+			return;
+		}
+		try(Connection conn = ConnectionUtil.getConnection();) {
+			String sql = "UPDATE bank_account SET BA_BALANCE = ? where u_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			double totalAmount = account.getBalance() - amount;
+			ps.setDouble(1, totalAmount);
+			System.out.println("uid: " + user.getUid());
+			ps.setDouble(2, user.getUid());
+			
+			ps.executeUpdate(); // automatically commit;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public double getBalance(Account account, User user) {

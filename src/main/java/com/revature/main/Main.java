@@ -70,7 +70,7 @@ public class Main {
 	
 	public static void logIn(User user, Account account, Service service, Scanner scan) {
 		
-		System.out.println("Enter Your User Name");
+		System.out.println("Enter Your Username");
 		String userName = scan.nextLine();
 		System.out.println("Enter Your Password");
 		String password = scan.nextLine();
@@ -91,15 +91,15 @@ public class Main {
 		case 1:  //deposite
 			
 			System.out.println("Input the amount that you want to deposite: ");
-			int amount = scan.nextInt();
-			System.out.println("You input amount: " + amount);
-			service.deposit(account, user, amount);
+			int dAmount = scan.nextInt();
+			System.out.println("You input amount: " + dAmount);
+			service.deposit(account, user, dAmount);
 			break;
 		case 2:	//withdraw
 			System.out.println("Input the amount that you want to withdraw: ");
-			int amount = scan.nextInt();
-			System.out.println("You input amount: " + amount);
-			service.withdraw(account, user, amount);
+			int wAmount = scan.nextInt();
+			System.out.println("You input amount: " + wAmount);
+			service.withdraw(account, user, wAmount);
 			break;
 		case 3:
 			System.out.println("This is your balance: ");

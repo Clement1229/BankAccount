@@ -19,8 +19,8 @@ public class Service {
 	public void deposit(Account account, User user, double amount) {
 		dao.deposit(account, user, amount);
 	}
-	public void withdraw(Account account, double amount) {
-		dao.withdraw(account, amount);
+	public void withdraw(Account account, User user, double amount) {
+		dao.withdraw(account, user, amount);
 	}
 	public double getBalance(Account account, User user) {
 		return dao.getBalance(account, user);
