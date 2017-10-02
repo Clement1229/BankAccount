@@ -2,8 +2,7 @@ package com.revature.main;
 
 import java.util.Scanner;
 
-import com.revature.dao.Dao;
-import com.revature.dao.DaoImpl;
+import com.revature.domain.Account;
 import com.revature.domain.User;
 import com.revature.service.Service;
 
@@ -14,6 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		User user = new User();
+		Account account = new Account();
 		Service service = new Service();
 
 //		A user can login
@@ -32,6 +32,7 @@ public class Main {
 		System.out.println("What would you like to do");
 		System.out.println("1: Become a new Customer");
 		System.out.println("2: Log In");
+		System.out.println("3: Exit");
 
 		int decision = scan.nextInt();
 		scan.nextLine();
@@ -42,20 +43,13 @@ public class Main {
 			newCostomer(user, service, scan);
 			break;
 		case 2:	
-			logIn(user, service, scan);
+			logIn(user, account, service, scan);
 			break;
-		case 5:
+		case 3:
 			break;
 
 		}
 		scan.close();
-		
-		
-		
-		// createUser() test
-//		User user = new User("Momo","Chen","hahamoyoyo","p4ssw0rd");
-//		Dao dao = new DaoImpl();
-//		System.out.println("Saving the new user:" + dao.createUser(user));
 		
 	}
 	public static void newCostomer(User user, Service service, Scanner scan) {
@@ -72,10 +66,9 @@ public class Main {
 		user.setUserName(userName);
 		user.setPassword(password);
 		service.createUser(user);
-		//break;
 	}
 	
-	public static void logIn(User user, Service service, Scanner scan) {
+	public static void logIn(User user, Account account, Service service, Scanner scan) {
 		
 		System.out.println("Enter Your User Name");
 		String userName = scan.nextLine();
@@ -83,11 +76,39 @@ public class Main {
 		String password = scan.nextLine();
 		user.setUserName(userName);
 		user.setPassword(password);
-		System.out.println("youre user id: " + service.getBankUserByUsernamePassword(userName,password));
-//		System.out.println("What would you like to do");
-//		System.out.println("1: Deposit");
-//		System.out.println("2: Withdraw");
-//		System.out.println("3: View Balance");
-//		System.out.println("4: Exit");
+		System.out.println("***********************************************************************************");
+		System.out.println("This is your information " + service.getUserByUsernamePassword(userName,password));
+		System.out.println("***********************************************************************************");
+		System.out.println("What would you like to do");
+		System.out.println("1: Deposit");
+		System.out.println("2: Withdraw");
+		System.out.println("3: View Balance");
+		System.out.println("4: Exit");
+		user = service.getUserByUsernamePassword(userName, password); //acquired user_id
+		int decision = scan.nextInt();
+		switch (decision) {
+
+		case 1:  //deposite
+			
+			System.out.println("Input the amount that you want to deposite: ");
+			int amount = scan.nextInt();
+			System.out.println("You input amount: " + amount);
+			service.deposit(account, user, amount);
+			break;
+		case 2:	//withdraw
+			System.out.println("Input the amount that you want to withdraw: ");
+			int amount = scan.nextInt();
+			System.out.println("You input amount: " + amount);
+			service.withdraw(account, user, amount);
+			break;
+		case 3:
+			System.out.println("This is your balance: ");
+			//service.getBalance(account, user);
+			System.out.println(service.getBalance(account, user));
+			break;
+		case 4:
+			break;
+
+		}
 	}
 }

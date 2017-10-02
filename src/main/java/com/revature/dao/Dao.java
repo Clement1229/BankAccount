@@ -10,11 +10,14 @@ public interface Dao {
 		
 		//Create
 		public int createUser(User user);
-		public int createAccount(Account acc);
-		
+		//public int createAccount(Account acc);
+		public void deposit(Account account, User user, double amount);
+		public void withdraw(Account account, double amount);
+		public double getBalance(Account account, User user); 
+
 		
 		//READ
-		public User getBankUserByUsernamePassword(String userName, String password); 
+		public User getUserByUsernamePassword(String userName, String password); 
 		//public List<FlashCard> getAllFlashCard();
 		//public FlashCard getFlashCardByid(int id);
 		//public FlashCard getFlashCardByQuestion(String question);
