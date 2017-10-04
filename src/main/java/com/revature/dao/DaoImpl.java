@@ -140,7 +140,7 @@ public class DaoImpl implements Dao {
 		try(Connection conn = ConnectionUtil.getConnection();) {
 			CallableStatement cs = conn.prepareCall("{call store_transaction(?,?, ?)}");	
 			cs.setInt(1, account.getBaid());
-			cs.setInt(2, 1);	// 1- deposit,   2- withdraw
+			cs.setInt(2, type);	// 1- deposit,   2- withdraw
 			cs.setDouble(3, amount);
 			cs.executeUpdate();
 		} catch (SQLException e) {
