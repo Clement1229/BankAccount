@@ -85,6 +85,7 @@ public class Main {
 		System.out.println("3: View Balance");
 		System.out.println("4: Exit");
 		user = service.getUserByUsernamePassword(userName, password); //acquired user_id
+		account = service.getAccountByUid(user.getUid());
 		int decision = scan.nextInt();
 		switch (decision) {
 

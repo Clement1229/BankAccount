@@ -154,6 +154,25 @@ public class DaoImpl implements Dao {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Account getAccountByUid(int uid) {
+		Account account = null;
+		try (Connection conn = ConnectionUtil.getConnection();) {
+
+			String sql = "SELECT BA_ID, BA_BALANCE, U_ID FROM BANK_ACCOUNT WHERE U_ID = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, uid);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				account = new Account(rs.getInt(1),rs.getDouble(2),rs.getInt(3));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return account;
+	}
 	
 	
 

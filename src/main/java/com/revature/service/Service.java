@@ -25,4 +25,7 @@ public class Service {
 	public double getBalance(Account account, User user) {
 		return dao.getBalance(account, user);
 	}
+	public Account getAccountByUid(int uid) {
+		return dao.getAccountByUid(uid);
+	}
 }
