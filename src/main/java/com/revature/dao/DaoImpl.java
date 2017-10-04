@@ -83,20 +83,13 @@ public class DaoImpl implements Dao {
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 
-			System.out.println("original balance:" + account.getBalance());
+//			System.out.println("original balance:" + account.getBalance());
 			double totalAmount = account.getBalance() + amount;
 			ps.setDouble(1, totalAmount);
 			System.out.println("uid: " + user.getUid());
 			ps.setDouble(2, user.getUid());
 			storeTransaction(account, amount, 1); //1-deposit, 2-withdraw
 			ps.executeUpdate(); // automatically commit;
-			
-			
-//			CallableStatement cs = conn.prepareCall("{call store_transaction_trigger(?,?, ?)}");	
-//			cs.setInt(1, account.getBaid());
-//			cs.setInt(2, 1);	// 1- deposit,   2- withdraw
-//			cs.setDouble(3, amount);getClass();
-//			cs.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
