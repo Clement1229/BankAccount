@@ -1,12 +1,13 @@
 package com.revature.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.revature.domain.Account;
-import com.revature.domain.User;
+import com.revature.pojos.Account;
+import com.revature.pojos.User;
 import com.revature.util.ConnectionUtil;
 
 public class DaoImpl implements Dao {
@@ -81,12 +82,22 @@ public class DaoImpl implements Dao {
 			String sql = "UPDATE bank_account SET BA_BALANCE = ? where u_id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
+
+			System.out.println("original balance:" + account.getBalance());
 			double totalAmount = account.getBalance() + amount;
 			ps.setDouble(1, totalAmount);
 			System.out.println("uid: " + user.getUid());
 			ps.setDouble(2, user.getUid());
-			
+			storeTransaction(account, amount, 1); //1-deposit, 2-withdraw
 			ps.executeUpdate(); // automatically commit;
+			
+			
+//			CallableStatement cs = conn.prepareCall("{call store_transaction_trigger(?,?, ?)}");	
+//			cs.setInt(1, account.getBaid());
+//			cs.setInt(2, 1);	// 1- deposit,   2- withdraw
+//			cs.setDouble(3, amount);getClass();
+//			cs.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +118,7 @@ public class DaoImpl implements Dao {
 			ps.setDouble(1, totalAmount);
 			System.out.println("uid: " + user.getUid());
 			ps.setDouble(2, user.getUid());
-			
+			storeTransaction(account, amount, 2); //1-deposit, 2-withdraw
 			ps.executeUpdate(); // automatically commit;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -130,24 +141,21 @@ public class DaoImpl implements Dao {
 		}
 		return account.getBalance();
 	}
-	
-	/*public int getUidNBy(Account account, User user) {
-		try(Connection conn = ConnectionUtil.getConnection();) {
-			String sql = "SELECT ba_balance FROM BANK_ACCOUNT WHERE U_ID = ?";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, user.getUid());
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				account.setBalance(rs.getInt(1));
-			}
 
-			ps.executeUpdate(); // automatically commit;
+	public void storeTransaction(Account account, double amount, int type) {
+		System.out.println("Storing Transaction");
+		try(Connection conn = ConnectionUtil.getConnection();) {
+			CallableStatement cs = conn.prepareCall("{call store_transaction(?,?, ?)}");	
+			cs.setInt(1, account.getBaid());
+			cs.setInt(2, 1);	// 1- deposit,   2- withdraw
+			cs.setDouble(3, amount);
+			cs.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return account.getBalance();
-		
-	}*/
+	}
+	
+	
 
 
 }

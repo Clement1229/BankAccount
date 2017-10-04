@@ -1,4 +1,4 @@
-package com.revature.domain;
+package com.revature.pojos;
 
 public class User {
 //	U_ID

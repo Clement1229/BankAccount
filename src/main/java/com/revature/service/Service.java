@@ -3,8 +3,8 @@ package com.revature.service;
 
 import com.revature.dao.Dao;
 import com.revature.dao.DaoImpl;
-import com.revature.domain.Account;
-import com.revature.domain.User;
+import com.revature.pojos.Account;
+import com.revature.pojos.User;
 
 public class Service {
 	

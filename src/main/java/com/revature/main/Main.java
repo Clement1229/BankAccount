@@ -2,8 +2,8 @@ package com.revature.main;
 
 import java.util.Scanner;
 
-import com.revature.domain.Account;
-import com.revature.domain.User;
+import com.revature.pojos.Account;
+import com.revature.pojos.User;
 import com.revature.service.Service;
 
 public class Main {

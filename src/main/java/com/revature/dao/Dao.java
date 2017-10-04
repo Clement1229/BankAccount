@@ -1,7 +1,7 @@
 package com.revature.dao;
 
-import com.revature.domain.Account;
-import com.revature.domain.User;
+import com.revature.pojos.Account;
+import com.revature.pojos.User;
 
 public interface Dao {
 	/*
@@ -10,22 +10,14 @@ public interface Dao {
 		
 		//Create
 		public int createUser(User user);
-		//public int createAccount(Account acc);
-		public void deposit(Account account, User user, double amount);
-		public void withdraw(Account account, User user, double amount);
-		public double getBalance(Account account, User user); 
-
-		
+//		public void storeTransaction(Account account, double amount, int type);
 		//READ
 		public User getUserByUsernamePassword(String userName, String password); 
-		//public List<FlashCard> getAllFlashCard();
-		//public FlashCard getFlashCardByid(int id);
-		//public FlashCard getFlashCardByQuestion(String question);
-		
+		public double getBalance(Account account, User user);
 		
 		//UPDATE
-		//public int updateFlashCard(FlashCard fc);
+		public void deposit(Account account, User user, double amount);
+		public void withdraw(Account account, User user, double amount);
 		
 		//DELETE
-		//public int deleteFlashCard(FlashCard fc);
 }
