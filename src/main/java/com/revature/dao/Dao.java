@@ -1,7 +1,10 @@
 package com.revature.dao;
 
-import com.revature.pojos.Account;
-import com.revature.pojos.User;
+import java.util.List;
+
+import com.revature.domain.Account;
+import com.revature.domain.Transaction;
+import com.revature.domain.User;
 
 public interface Dao {
 	/*
@@ -15,7 +18,7 @@ public interface Dao {
 		public User getUserByUsernamePassword(String userName, String password); 
 		public double getBalance(Account account, User user);
 		public Account getAccountByUid(int uid);
-		
+		public List<Transaction> viewTransactionHistory(Account account);
 		
 		//UPDATE
 		public void deposit(Account account, User user, double amount);

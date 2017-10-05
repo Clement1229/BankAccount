@@ -1,10 +1,13 @@
 package com.revature.service;
 
 
+import java.util.List;
+
 import com.revature.dao.Dao;
 import com.revature.dao.DaoImpl;
-import com.revature.pojos.Account;
-import com.revature.pojos.User;
+import com.revature.domain.Account;
+import com.revature.domain.Transaction;
+import com.revature.domain.User;
 
 public class Service {
 	
@@ -27,5 +30,8 @@ public class Service {
 	}
 	public Account getAccountByUid(int uid) {
 		return dao.getAccountByUid(uid);
+	}
+	public List<Transaction> viewTransactionHistory(Account account){
+		return dao.viewTransactionHistory(account);
 	}
 }

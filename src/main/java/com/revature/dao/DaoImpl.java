@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.revature.pojos.Account;
-import com.revature.pojos.User;
+import com.revature.domain.Account;
+import com.revature.domain.Transaction;
+import com.revature.domain.User;
 import com.revature.util.ConnectionUtil;
 
 public class DaoImpl implements Dao {
@@ -165,6 +168,31 @@ public class DaoImpl implements Dao {
 			e.printStackTrace();
 		}
 		return account;
+	}
+
+	@Override
+	public List<Transaction> viewTransactionHistory(Account account) {
+		
+		List<Transaction> transactions = new ArrayList<>();
+		
+		try (Connection conn = ConnectionUtil.getConnection();) {
+
+			String sql = "SELECT (SELECT BTT_TYPE FROM BANK_TX_TYPE WHERE BANK_TX.BTT_ID = BANK_TX_TYPE.BTT_ID ), TX_AMOUNT, TX_TIMESTAMP FROM BANK_TX WHERE BA_ID = ?";
+			//String sql = "SELECT BTT_TYPE, TX_AMOUNT, TX_TIMESTAMP FROM BANK_TX_TYPE, BANK_TX WHERE BA_ID = ? AND BANK_TX.BTT_ID =  BANK_TX_TYPE.BTT_ID;";
+			//String sql = "SELECT BTT_ID, TX_AMOUNT, TX_TIMESTAMP FROM BANK_TX WHERE BA_ID = ? ";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			System.out.println("baid: " + account.getBaid());
+			ps.setInt(1, account.getBaid());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				transactions.add(new Transaction(rs.getString(1), rs.getDouble(2), rs.getString(3)));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return transactions;
+		
 	}
 	
 	

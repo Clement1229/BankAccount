@@ -2,8 +2,8 @@ package com.revature.main;
 
 import java.util.Scanner;
 
-import com.revature.pojos.Account;
-import com.revature.pojos.User;
+import com.revature.domain.Account;
+import com.revature.domain.User;
 import com.revature.service.Service;
 
 public class Main {
@@ -83,7 +83,8 @@ public class Main {
 		System.out.println("1: Deposit");
 		System.out.println("2: Withdraw");
 		System.out.println("3: View Balance");
-		System.out.println("4: Exit");
+		System.out.println("4: View Transaction history");
+		System.out.println("5: Exit");
 		user = service.getUserByUsernamePassword(userName, password); //acquired user_id
 		account = service.getAccountByUid(user.getUid());
 		int decision = scan.nextInt();
@@ -108,6 +109,10 @@ public class Main {
 			System.out.println(service.getBalance(account, user));
 			break;
 		case 4:
+			System.out.println("Transaction History");
+			System.out.println(service.viewTransactionHistory(account));
+			break;
+		case 5:
 			break;
 
 		}
