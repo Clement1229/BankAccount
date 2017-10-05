@@ -76,45 +76,50 @@ public class Main {
 		String password = scan.nextLine();
 		user.setUserName(userName);
 		user.setPassword(password);
-		System.out.println("***********************************************************************************");
+		System.out.println("**********************************************************************************************");
 		System.out.println("This is your information " + service.getUserByUsernamePassword(userName,password));
-		System.out.println("***********************************************************************************");
-		System.out.println("What would you like to do");
-		System.out.println("1: Deposit");
-		System.out.println("2: Withdraw");
-		System.out.println("3: View Balance");
-		System.out.println("4: View Transaction history");
-		System.out.println("5: Exit");
-		user = service.getUserByUsernamePassword(userName, password); //acquired user_id
-		account = service.getAccountByUid(user.getUid());
-		int decision = scan.nextInt();
-		switch (decision) {
-
-		case 1:  //deposite
+		System.out.println("**********************************************************************************************");
+		
+		boolean exit = false;
+		do {
+			System.out.println("What would you like to do");
+			System.out.println("1: Deposit");
+			System.out.println("2: Withdraw");
+			System.out.println("3: View Balance");
+			System.out.println("4: View Transaction history");
+			System.out.println("5: Exit");
+			user = service.getUserByUsernamePassword(userName, password); //acquired user_id
+			account = service.getAccountByUid(user.getUid());
+			int decision = scan.nextInt();
 			
-			System.out.println("Input the amount that you want to deposite: ");
-			int dAmount = scan.nextInt();
-			System.out.println("You input amount: " + dAmount);
-			service.deposit(account, user, dAmount);
-			break;
-		case 2:	//withdraw
-			System.out.println("Input the amount that you want to withdraw: ");
-			int wAmount = scan.nextInt();
-			System.out.println("You input amount: " + wAmount);
-			service.withdraw(account, user, wAmount);
-			break;
-		case 3:
-			System.out.println("This is your balance: ");
-			//service.getBalance(account, user);
-			System.out.println(service.getBalance(account, user));
-			break;
-		case 4:
-			System.out.println("Transaction History");
-			System.out.println(service.viewTransactionHistory(account));
-			break;
-		case 5:
-			break;
-
-		}
+			switch (decision) {
+	
+			case 1:  //deposite
+				
+				System.out.println("Input the amount that you want to deposite: ");
+				int dAmount = scan.nextInt();
+				System.out.println("You input amount: " + dAmount);
+				service.deposit(account, user, dAmount);
+				break;
+			case 2:	//withdraw
+				System.out.println("Input the amount that you want to withdraw: ");
+				int wAmount = scan.nextInt();
+				System.out.println("You input amount: " + wAmount);
+				service.withdraw(account, user, wAmount);
+				break;
+			case 3:
+				System.out.println("This is your balance: ");
+				//service.getBalance(account, user);
+				System.out.println(service.getBalance(account, user));
+				break;
+			case 4:
+				System.out.println("Transaction History");
+				System.out.println(service.viewTransactionHistory(account));
+				break;
+			case 5:
+				exit = true;
+				break;
+			}
+		}while(!exit);
 	}
 }
