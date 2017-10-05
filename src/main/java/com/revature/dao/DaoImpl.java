@@ -37,7 +37,7 @@ public class DaoImpl implements Dao {
 			
 			String sql2= "INSERT INTO bank_account (U_ID) values(?)"; 
 			PreparedStatement ps2 = conn.prepareStatement(sql2);
-			System.out.println("uid: " + user.getUid());
+			//System.out.println("uid: " + user.getUid());
 			ps2.setInt(1, user.getUid());
 			ps2.executeUpdate();
 			//System.out.println("Status: " + status);
@@ -89,7 +89,7 @@ public class DaoImpl implements Dao {
 //			System.out.println("original balance:" + account.getBalance());
 			double totalAmount = account.getBalance() + amount;
 			ps.setDouble(1, totalAmount);
-			System.out.println("uid: " + user.getUid());
+//			System.out.println("uid: " + user.getUid());
 			ps.setDouble(2, user.getUid());
 			storeTransaction(account, amount, 1); //1-deposit, 2-withdraw
 			ps.executeUpdate(); // automatically commit;
@@ -112,7 +112,7 @@ public class DaoImpl implements Dao {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			double totalAmount = account.getBalance() - amount;
 			ps.setDouble(1, totalAmount);
-			System.out.println("uid: " + user.getUid());
+//			System.out.println("uid: " + user.getUid());
 			ps.setDouble(2, user.getUid());
 			storeTransaction(account, amount, 2); //1-deposit, 2-withdraw
 			ps.executeUpdate(); // automatically commit;
